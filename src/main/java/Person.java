@@ -8,25 +8,24 @@ public class Person {
     protected String address;
 
     public Person(String name, String surname) {
-        this(name, surname, -1, null);
-    }
-
-    public Person(String name, String surname, int age) {
-        this(name, surname, age, null);
-    }
-
-    public Person(String name, String surname, int age, String address) {
         if (name != null && surname != null) {
             this.name = name;
             this.surname = surname;
         } else {
             throw new NullPointerException();
         }
+
+    }
+
+    public Person(String name, String surname, int age) {
+        this(name, surname);
         if (age > -1) {
             this.age = OptionalInt.of(age);
-        } else {
-            this.age = OptionalInt.empty();
-        }
+        } else throw new IllegalArgumentException("Age cannot be a negative number");
+    }
+
+    public Person(String name, String surname, int age, String address) {
+        this(name, surname, age);
         this.address = address;
     }
 
